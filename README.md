@@ -1,7 +1,7 @@
 # Questions Creator
 Questions Creator helps to generate encoded txt files used by my personal projects.
 
-## View at
+## View Online
 https://zivrefaeli.github.io/Questions-Creator/
 
 ## Steps
