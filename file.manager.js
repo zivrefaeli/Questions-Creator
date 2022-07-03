@@ -12,12 +12,22 @@ function downloadToFile(content) {
     const encodeContent = encode(content, key);
     const filename = `QC-${key}`;
 
-    const a = document.createElement('a');
-    const file = new Blob([encodeContent], { type: 'text/plain' });
-    a.href = URL.createObjectURL(file);
-    a.download = filename;
-    a.click();
-    URL.revokeObjectURL(a.href);
+    // const a = document.createElement('a');
+    // const file = new Blob([encodeContent], { type: 'text/plain' });
+    // a.href = URL.createObjectURL(file);
+    // a.download = filename;
+    // a.click();
+    // URL.revokeObjectURL(a.href);
+    const element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(encodeContent));
+    element.setAttribute('download', filename);
+    
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+    
+    document.body.removeChild(element);
 }
 
 function encode(content, key) {
