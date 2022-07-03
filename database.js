@@ -6,6 +6,7 @@ const currectQuestions = [];
 
 class Question {
     constructor(url) {
+        this.index = currectQuestions.length + 1;
         const list = String(url).substring(1).split('&');
         this.title = this.#getValue(list[0]);
         this.count = parseInt(this.#getValue(list[1]));
@@ -102,7 +103,7 @@ function getQuestionByTitle(title) {
     };
 }
 
-function getAllQuestions() {
+function getAllQuestions(search) {
     const request = indexedDB.open(db_name, db_version);
     request.onerror = (event) => {
         console.error(`db error: ${event.target.errorCode}`);
@@ -123,7 +124,10 @@ function getAllQuestions() {
         transaction.oncomplete = () => {
             db.close();
             console.table(currectQuestions);
-            displayAllQuestions();
+            if (search != '')
+                insertQuestion(new Question(search));
+            else
+                displayAllQuestions();
         };
     };
 }

@@ -11,11 +11,7 @@ window.onload = () => {
     initializeTable();
     console.log(window.location.search);
     const search = decodeURIComponent(window.location.search.replaceAll('+', ' '));
-    if (search != '') {
-        insertQuestion(new Question(search));
-    } else {
-        getAllQuestions();
-    }
+    getAllQuestions(search);
 };
 
 btnAdd.onclick = () => {
@@ -86,6 +82,7 @@ function createAnswer(num) {
 
 function displayAllQuestions() {
     divQuestions.innerHTML = '';
+    currectQuestions.sort((q1, q2) => q1.index - q2.index);
     currectQuestions.forEach(q => {
         const div = document.createElement('div');
         div.className = 'q';

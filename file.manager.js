@@ -1,5 +1,5 @@
 const letters = 'אבגדהוזחטיכלמנסעפצקרשתםףךץן'.split('');
-for (var i = 32; i < 127; i++)
+for (let i = 32; i < 127; i++)
     letters.push(String.fromCharCode(i));
 
 function random(min, max) {
