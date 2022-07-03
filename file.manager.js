@@ -10,24 +10,12 @@ function downloadToFile(content) {
     const key = random(1, letters.length - 1);
     content += 'Created by: Ziv Refeali';
     const encodeContent = encode(content, key);
-    const filename = `QC-${key}`;
-
-    // const a = document.createElement('a');
-    // const file = new Blob([encodeContent], { type: 'text/plain' });
-    // a.href = URL.createObjectURL(file);
-    // a.download = filename;
-    // a.click();
-    // URL.revokeObjectURL(a.href);
-    const element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(encodeContent));
-    element.setAttribute('download', filename);
+    const filename = `QC-${key}.txt`;
     
-    element.style.display = 'none';
-    document.body.appendChild(element);
-
-    element.click();
-    
-    document.body.removeChild(element);
+    const a = document.createElement('a');
+    a.href = `data:text/plain;charset=utf-8,${encodeContent}`;
+    a.download = filename;
+    a.click();
 }
 
 function encode(content, key) {
