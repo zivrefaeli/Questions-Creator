@@ -6,6 +6,45 @@ function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function validateFile(file) {
+    const name = String(file.name);
+    if (!name.startsWith('QC'))
+        return -1;
+    const list = name.split('-');
+    if (list.length != 2)
+        return -1;
+    return parseInt(list[1]);
+}
+
+function uploadFile(file, handleData) {
+    const reader = new FileReader();
+    try {
+        reader.readAsText(file);
+    } catch {
+        console.log("error");
+        return;
+    }
+
+    reader.onload = (event) => {
+        console.log(file);
+        const key = validateFile(file);
+        if (key != -1) {
+            const data = decode(event.target.result, key);
+            if (data.endsWith('Ziv Refeali')) {
+                handleData(data);
+            } else {
+                alert('הכניסו את הקובץ הנכון!');
+            }
+        } else {
+            alert('הכניסו את הקובץ הנכון!');
+        }
+    };
+
+    reader.onerror = (event) => {
+        console.log("error: " + event);
+    };
+}
+
 function downloadToFile(content) {
     const key = random(1, letters.length - 1);
     content += 'Created by: Ziv Refeali';
