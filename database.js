@@ -4,7 +4,7 @@ const table_name = 'questions';
 const primary_key = 'title';
 const currectQuestions = [];
 
-class Question {
+class DBQuestion {
     constructor(url) {
         this.index = currectQuestions.length + 1;
         const list = String(url).substring(1).split('&');
@@ -125,7 +125,7 @@ function getAllQuestions(search) {
             db.close();
             console.table(currectQuestions);
             if (search != '')
-                insertQuestion(new Question(search));
+                insertQuestion(new DBQuestion(search));
             else
                 displayAllQuestions();
         };
