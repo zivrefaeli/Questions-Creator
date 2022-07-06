@@ -2,6 +2,39 @@ const letters = 'אבגדהוזחטיכלמנסעפצקרשתםףךץן'.split('
 for (let i = 32; i < 127; i++)
     letters.push(String.fromCharCode(i));
 
+class Question {
+    constructor(number, title, answers, correct) {
+        this.number = number;
+        this.title = title;
+        this.answers = []
+        let ans = String(answers).split(',');
+        ans.forEach(value => {
+            this.answers.push(value);
+        });
+        this.correct = parseInt(correct);
+    }
+}
+
+function convertData(data) {
+    const questions = [];
+    let dataArr = String(data).split('\n');
+    dataArr = dataArr.map(value => {
+        if (value.endsWith('\r'))
+            return value.substring(0, value.length - 1);
+        return value;
+    });
+    dataArr.pop();
+    console.log(dataArr);
+    let count = 0;
+    dataArr.forEach(q => {
+        let parts = q.split('|');
+        let qus = new Question(++count, parts[0], parts[1], parts[2])
+        questions.push(qus);
+    });
+    console.table(questions);
+    return questions;
+}
+
 function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
