@@ -30,7 +30,7 @@ btnCreate.onclick = () => {
     }
     let content = '';
     currectQuestions.forEach(q => {
-        content += Question.getCode(q);
+        content += DBQuestion.getCode(q);
     });
     downloadToFile(content);
     clearQuestions();
