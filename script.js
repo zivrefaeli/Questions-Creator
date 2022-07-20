@@ -24,10 +24,10 @@ btnClose.onclick = () => {
 };
 
 btnCreate.onclick = () => {
-//     if (currectQuestions.length < 2) {
-//         alert('הכניסו לפחות שתי שאלות!');
-//         return;
-//     }
+    if (currectQuestions.length < 1) {
+        alert('הכניסו לפחות שאלה אחת!');
+        return;
+    }
     let content = '';
     currectQuestions.forEach(q => {
         content += DBQuestion.getCode(q);
